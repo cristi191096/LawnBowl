@@ -13,15 +13,28 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
 #include <fstream>
+
+
+struct ShaderSource {
+	std::string VertexSource;
+	std::string FragmentSource;
+};
 
 class Shader
 {
-public:
-	void ReadShader(const std::string& filePath);
+	ShaderSource shaderSources;
+	unsigned int shader;
+
+	ShaderSource ReadShader(const std::string& filePath);
 	unsigned int CompileShader(unsigned int type, const std::string source);
 	unsigned int CreateShader(const std::string& vertexShader, const std::string fragmentShader);
-	Shader();
+
+public:
+	unsigned int GetShader();
+	void Use();
+	Shader(std::string& file);
 	~Shader();
 };
 
