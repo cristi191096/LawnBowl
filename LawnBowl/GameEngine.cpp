@@ -1,8 +1,13 @@
 #include "GameEngine.h"
 
 std::vector<GameObject*> GameEngine::gameobjects;
+glm::mat4 GameEngine::projectionMat = glm::mat4();
+glm::mat4 *GameEngine::modelView = new glm::mat4();
 
+#pragma region INIT
 void GameEngine::initEngine(int argc, char **argv, const char* windowTitle, bool debug, int width, int height) {
+
+	GameEngine::modelView = Transform::modelView;
 
 	glutInit(&argc, argv);
 
@@ -22,12 +27,21 @@ void GameEngine::initEngine(int argc, char **argv, const char* windowTitle, bool
 
 	glEnable(GL_DEPTH_TEST);
 
+
+
 	glutDisplayFunc(displayFunc);
 
 	glutReshapeFunc(reshapeFunc);
 
-	//glutKeyboardFunc();
-	/*glutKeyboardUpFunc([](unsigned char key, int x, int y) {
+	glutKeyboardFunc([](unsigned char key, int x, int y) {
+		GameObject::keys[key] = true;
+
+		if (key == 27) {
+			
+			exit(0);
+		}
+	});
+	glutKeyboardUpFunc([](unsigned char key, int x, int y) {
 		GameObject::keys[key] = false;
 	});
 
@@ -37,12 +51,12 @@ void GameEngine::initEngine(int argc, char **argv, const char* windowTitle, bool
 
 	glutSpecialUpFunc([](int key, int x, int y) {
 		GameObject::specialKeys[key] = false;
-	});*/
+	});
 
 
 	glutIdleFunc(updateGame);
 }
-
+#pragma endregion Initialise glut, glew and some variables
 void GameEngine::displayFunc() 
 {
 
@@ -51,6 +65,10 @@ void GameEngine::displayFunc()
 void GameEngine::reshapeFunc(int w, int h) 
 {
 	glViewport(0, 0, w, h);
+}
+
+void GameEngine::addGameObject(GameObject * gameobject, bool follow)
+{
 }
 
 #pragma region COLISION_DETECTION
@@ -71,5 +89,8 @@ void GameEngine::updateGame() {
 void GameEngine::startEngine() {
 
 
+}
+void GameEngine::cleanup()
+{
 }
 #pragma endregion aka setup()

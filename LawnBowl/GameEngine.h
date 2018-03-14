@@ -1,12 +1,16 @@
 #pragma once
 
 #include "GameObject.h"
+#include "Shader.h"
 #include <iostream>
 #include <vector>
 
 class GameEngine
 {
 	static std::vector<GameObject*> gameobjects; ///<Vector of (pointers to) game objects: all the objects in the game.
+
+	static glm::mat4 projectionMat;
+	static glm::mat4 *modelView;
 
 	static void FixedUpdate();
 	static void updateGame(); ///<Function that updates the game state

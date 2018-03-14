@@ -87,25 +87,25 @@ unsigned int Shader::CreateShader(const std::string & vertexShader, const std::s
 	return program;
 }
 
-unsigned int Shader::GetShader()
+unsigned int Shader::GetProgramID()
 {
-	return shader;
+	return id;
 }
 
 void Shader::Use()
 {
-	glUseProgram(shader);
+	glUseProgram(id);
 }
 
 Shader::Shader(std::string& file)
 {
-	shaderSources = ReadShader(file);
+	source = ReadShader(file);
 
-	shader = CreateShader(shaderSources.VertexSource, shaderSources.FragmentSource);
+	id = CreateShader(source.VertexSource, source.FragmentSource);
 }
 
 
 Shader::~Shader()
 {
-	glDeleteProgram(shader);
+	glDeleteProgram(id);
 }

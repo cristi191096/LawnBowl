@@ -24,12 +24,16 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="MainSource.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Vector3D.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\GameShaders.shader" />

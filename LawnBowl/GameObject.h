@@ -13,10 +13,27 @@
 #pragma comment(lib, "glew32d.lib") 
 #endif
 
+#include "Collider.h"
+#include "Transform.h"
+#include <map>
+
 class GameObject
 {
 public:
-	GameObject();
+	static std::map<int, bool> GameObject::specialKeys;
+	static std::map<char, bool> GameObject::keys;
+	Transform* transform;
+
+	GameObject(Vector3D);
 	~GameObject();
+
+	virtual unsigned int setupDrawing(unsigned int);
+	virtual void drawScene();
+
+	virtual void start() = 0;
+	virtual void update(int deltaTime) = 0;
+
+	virtual void EnterCollider(Collider* other);
+	virtual void ExitCollider(Collider* other);
 };
 

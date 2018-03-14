@@ -24,15 +24,15 @@ struct ShaderSource {
 
 class Shader
 {
-	ShaderSource shaderSources;
-	unsigned int shader;
+	ShaderSource source;
+	unsigned int id;
 
 	ShaderSource ReadShader(const std::string& filePath);
 	unsigned int CompileShader(unsigned int type, const std::string source);
 	unsigned int CreateShader(const std::string& vertexShader, const std::string fragmentShader);
 
 public:
-	unsigned int GetShader();
+	unsigned int GetProgramID();
 	void Use();
 	Shader(std::string& file);
 	~Shader();
