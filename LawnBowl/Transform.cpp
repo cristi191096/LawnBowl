@@ -18,6 +18,7 @@ void Transform::Translate(Vector3D newPos)
 
 void Transform::Rotate(float angle, Vector3D direction)
 {
+
 }
 
 void Transform::Scale(Vector3D newScale)
