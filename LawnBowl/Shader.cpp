@@ -87,14 +87,34 @@ unsigned int Shader::CreateShader(const std::string & vertexShader, const std::s
 	return program;
 }
 
+unsigned int Shader::GetUniformLocation(const std::string & name)
+{
+	if (uniformLocationCache.find(name) != uniformLocationCache.end()) {
+		return uniformLocationCache[name];
+	}
+	int location = glGetUniformLocation(id, name.c_str());
+
+	if (location == -1) {
+		std::cout << "Uniform " << name << " doesn't exist" << std::endl;
+	}
+	
+	uniformLocationCache[name] = location;
+	return location;
+}
+
 unsigned int Shader::GetProgramID()
 {
 	return id;
 }
 
-void Shader::Use()
+void Shader::Bind() const
 {
 	glUseProgram(id);
+}
+
+void Shader::Unbind() const
+{
+	glUseProgram(0);
 }
 
 Shader::Shader(std::string& file)

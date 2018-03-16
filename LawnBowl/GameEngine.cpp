@@ -7,8 +7,6 @@ glm::mat4 *GameEngine::modelView = new glm::mat4();
 #pragma region INIT
 void GameEngine::initEngine(int argc, char **argv, const char* windowTitle, bool debug, int width, int height) {
 
-	GameEngine::modelView = Transform::modelView;
-
 	glutInit(&argc, argv);
 
 	glutInitContextVersion(4, 3);

@@ -16,5 +16,7 @@ class Renderer
 public:
 	Renderer();
 	~Renderer();
+	//TODO here
+	void Draw();
 };
 

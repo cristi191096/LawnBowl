@@ -6,7 +6,7 @@
 class Transform
 {
 public:
-	static glm::mat4* modelView;
+	glm::mat4 modelView = glm::mat4(1.0);
 
 	Vector3D position;
 	Vector3D rotation;
