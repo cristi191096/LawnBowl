@@ -1,5 +1,14 @@
 #pragma once
-#include "Renderer.h"
+#ifdef __APPLE__
+#  include <GL/glew.h>
+
+#else
+#  include <GL/glew.h>
+
+
+#pragma comment(lib, "glew32d.lib") 
+#endif
+
 #include <vector>
 
 struct VBElements {

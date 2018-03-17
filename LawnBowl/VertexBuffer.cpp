@@ -1,5 +1,6 @@
 #include "VertexBuffer.h"
 
+#include "Renderer.h"
 
 
 
@@ -21,7 +22,7 @@ void VertexBuffer::Bind() const
 	glBindBuffer(GL_ARRAY_BUFFER, bufferID);
 }
 
-void VertexBuffer::Unbind()
+void VertexBuffer::Unbind() const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
