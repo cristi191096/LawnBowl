@@ -1,5 +1,7 @@
 #pragma once
+#include <vector>
 
+struct Vertex;
 
 class VertexBuffer
 {
@@ -7,7 +9,8 @@ class VertexBuffer
 	unsigned int bufferID;
 
 public:
-	VertexBuffer(const void* data, unsigned int size);
+	VertexBuffer();
+	VertexBuffer(const std::vector<Vertex>& data, unsigned int size);
 	~VertexBuffer();
 
 	void Bind() const;

@@ -1,5 +1,6 @@
 #include "Vector3D.h"
 #include "GameEngine.h"
+#include "OBJLoader.h"
 
 #define ASSERT(x) if(!(x)) __debugbreak();
 
@@ -14,7 +15,13 @@ bool TestVectorClass(Vector3D first, Vector3D second) {
 	return true;
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+
+	GameEngine::initEngine(argc, argv, "Lawn Bowl");
+
+	OBJLoader loader;
+
+	loader.LoadFile("Ball_and_Box.obj");
 
 	Vector3D myVec(5, 2, 3);
 	Vector3D otherVec(1, 1, 1);

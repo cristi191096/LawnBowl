@@ -11,7 +11,7 @@ Transform::Transform(Vector3D pos, Vector3D rot, Vector3D sc)
 
 void Transform::Translate(Vector3D newPos)
 {
-
+	modelView = glm::mat4(1.0);
 	modelView = glm::translate( modelView, 
 		glm::vec3(newPos.x(), newPos.y(), newPos.z())); 
 }
@@ -23,6 +23,7 @@ void Transform::Rotate(float angle, Vector3D direction)
 
 void Transform::Scale(Vector3D newScale)
 {
+	modelView = glm::mat4(1.0);
 	modelView = glm::scale(modelView, glm::vec3(newScale.x(), newScale.y(), newScale.z()));
 }
 

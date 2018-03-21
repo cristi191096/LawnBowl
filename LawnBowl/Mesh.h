@@ -11,7 +11,7 @@ struct Vertex {
 
 class Mesh
 {
-	VertexArray* va;
+	VertexBuffer buffer;
 
 public:
 	std::vector<Vertex> vertices;

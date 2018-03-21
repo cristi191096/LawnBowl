@@ -15,6 +15,7 @@
 
 #include "Collider.h"
 #include "Transform.h"
+#include "OBJLoader.h"
 #include <map>
 
 class GameObject
@@ -23,6 +24,7 @@ public:
 	static std::map<int, bool> GameObject::specialKeys;
 	static std::map<char, bool> GameObject::keys;
 	Transform* transform;
+	Mesh* mesh;
 
 	GameObject(Vector3D);
 	~GameObject();
