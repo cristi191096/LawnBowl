@@ -10,9 +10,12 @@ Mesh::Mesh()
 Mesh::Mesh(std::vector<Vertex>& verts, std::vector<unsigned int>& inds) :
 	vertices(verts), indices(inds)
 {
-	buffer = VertexBuffer(vertices, sizeof(vertices));
+	buffer = new VertexBuffer(vertices, sizeof(vertices));
+	//indexBuffer = new IndexBuffer(indices, )
 }
 
 Mesh::~Mesh()
 {
+	delete buffer;
+	//delete indexBuffer;
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "VertexArray.h"
+#include "IndexBuffer.h"
 #include "Material.h"
 #include "glm.hpp"
 
@@ -11,7 +12,8 @@ struct Vertex {
 
 class Mesh
 {
-	VertexBuffer buffer;
+	VertexBuffer* buffer;
+	IndexBuffer* indexBuffer;
 
 public:
 	std::vector<Vertex> vertices;

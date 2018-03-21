@@ -6,6 +6,7 @@ std::map<char, bool> GameObject::keys;
 GameObject::GameObject(Vector3D pos)
 {
 	this->transform = new Transform(pos, Vector3D(0,0,0), Vector3D(1,1,1));
+	//Load Mesh. 
 }
 
 
