@@ -117,7 +117,7 @@ void Shader::Unbind() const
 	glUseProgram(0);
 }
 
-Shader::Shader(std::string& file)
+Shader::Shader(const std::string& file)
 {
 	source = ReadShader(file);
 

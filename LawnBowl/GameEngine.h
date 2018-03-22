@@ -1,9 +1,10 @@
 #pragma once
 
+#include "Renderer.h"
 #include "GameObject.h"
-#include "Shader.h"
 #include <iostream>
 #include <vector>
+#include <string>
 
 class GameEngine
 {
@@ -11,6 +12,7 @@ class GameEngine
 
 	static glm::mat4 projectionMat;
 	static glm::mat4 *modelView;
+	static Renderer* renderer;
 
 	static void FixedUpdate();
 	static void updateGame(); ///<Function that updates the game state

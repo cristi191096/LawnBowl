@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Shader.h"
-#include "VertexArray.h"
-#include "IndexBuffer.h"
+
+class GameObject;
 
 enum class DrawType {
 	ELEMENTS, ARRAYS
@@ -14,6 +13,6 @@ public:
 	Renderer();
 	~Renderer();
 	//TODO here
-	void Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader, DrawType type) const;
+	void Draw(GameObject* object, DrawType type) const;
 };
 

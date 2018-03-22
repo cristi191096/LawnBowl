@@ -1,10 +1,14 @@
 #pragma once
 #include <string>
 #include "glm.hpp"
+#include "Shader.h"
+
 
 class Material
 {
+
 public:
+	static Shader* shader;
 	std::string name;
 	glm::vec3 ambientColour;
 	glm::vec3 diffuseColour;
@@ -16,5 +20,7 @@ public:
 	std::string bumpMapName;
 	Material();
 	~Material();
+
+	void BindUniforms();
 };
 

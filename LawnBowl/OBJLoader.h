@@ -3,15 +3,12 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include "Mesh.h"
 
-struct Vertex;
-class Mesh;
-class Material;
 
 class OBJLoader
 {
-	// Loaded Mesh Objects
-	static std::vector<Mesh> LoadedMeshes;
+	
 	// Loaded Vertex Objects
 	static std::vector<Vertex> LoadedVertices;
 	// Loaded Index Positions
@@ -51,6 +48,9 @@ class OBJLoader
 		const std::vector<Vertex>& iVerts);
 
 public:
+	// Loaded Mesh Objects
+	static std::vector<Mesh> LoadedMeshes;
+
 	OBJLoader();
 	~OBJLoader();
 

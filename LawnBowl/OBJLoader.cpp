@@ -1,5 +1,5 @@
 #include "OBJLoader.h"
-#include "Mesh.h"
+
 
 std::vector<Mesh>			OBJLoader::LoadedMeshes;
 std::vector<Vertex>			OBJLoader::LoadedVertices;

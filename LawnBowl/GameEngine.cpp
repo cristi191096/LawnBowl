@@ -1,8 +1,10 @@
 #include "GameEngine.h"
 
+Renderer* GameEngine::renderer = new Renderer();
 std::vector<GameObject*> GameEngine::gameobjects;
 glm::mat4 GameEngine::projectionMat = glm::mat4();
 glm::mat4 *GameEngine::modelView = new glm::mat4();
+
 
 #pragma region INIT
 void GameEngine::initEngine(int argc, char **argv, const char* windowTitle, bool debug, int width, int height) {
@@ -24,8 +26,6 @@ void GameEngine::initEngine(int argc, char **argv, const char* windowTitle, bool
 	glEnable(GL_RGBA);
 
 	glEnable(GL_DEPTH_TEST);
-
-
 
 	glutDisplayFunc(displayFunc);
 
@@ -57,7 +57,11 @@ void GameEngine::initEngine(int argc, char **argv, const char* windowTitle, bool
 #pragma endregion Initialise glut, glew and some variables
 void GameEngine::displayFunc() 
 {
+	for (int i = 0; i < gameobjects.size(); i++) {
+		renderer->Draw(gameobjects[i], DrawType::ARRAYS);
+	}
 
+	glutSwapBuffers();
 }
 
 void GameEngine::reshapeFunc(int w, int h) 

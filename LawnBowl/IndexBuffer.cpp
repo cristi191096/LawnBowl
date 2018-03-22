@@ -2,7 +2,7 @@
 #include "Mesh.h"
 
 
-IndexBuffer::IndexBuffer(const unsigned int& data, unsigned int count) 
+IndexBuffer::IndexBuffer(const std::vector<unsigned int>& data, unsigned int count) 
 	: count(count)
 {
 	glGenBuffers(1, &bufferID);

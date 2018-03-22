@@ -3,6 +3,7 @@
 #include "IndexBuffer.h"
 #include "Material.h"
 #include "glm.hpp"
+#include "gtc\constants.hpp"
 
 struct Vertex {
 	glm::vec3 position;
@@ -12,10 +13,11 @@ struct Vertex {
 
 class Mesh
 {
-	VertexBuffer* buffer;
-	IndexBuffer* indexBuffer;
 
 public:
+	VertexBufferLayout* layout;
+	VertexBuffer* buffer;
+	IndexBuffer* indexBuffer;
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 	std::string name;
@@ -24,5 +26,7 @@ public:
 	Mesh();
 	Mesh(std::vector<Vertex>& verts, std::vector<unsigned int>& inds);
 	~Mesh();
+
+	void CreateSphere(int radius, int stacks, int slices);
 };
 

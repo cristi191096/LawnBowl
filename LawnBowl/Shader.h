@@ -37,7 +37,7 @@ class Shader
 
 public:
 	unsigned int GetProgramID();
-	Shader(std::string& file);
+	Shader(const std::string& file);
 	~Shader();
 	void Bind() const;
 	void Unbind() const;
