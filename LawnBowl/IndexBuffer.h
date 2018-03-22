@@ -1,7 +1,7 @@
 #pragma once
+#include <GL\glew.h>
+#include <vector>
 
-
-struct Vertex;
 
 class IndexBuffer
 {

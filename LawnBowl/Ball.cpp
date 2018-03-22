@@ -23,11 +23,11 @@ void Ball::update(int deltaTime)
 {
 }
 
-void Ball::EnterCollider(Collider * other)
+void Ball::EnterCollider(Collider* other)
 {
 }
 
-void Ball::ExitCollider(Collider * other)
+void Ball::ExitCollider(Collider* other)
 {
 }
 

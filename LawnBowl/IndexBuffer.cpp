@@ -1,5 +1,5 @@
 #include "IndexBuffer.h"
-#include "Mesh.h"
+
 
 
 IndexBuffer::IndexBuffer(const std::vector<unsigned int>& data, unsigned int count) 

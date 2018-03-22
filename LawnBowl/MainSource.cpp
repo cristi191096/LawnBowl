@@ -1,5 +1,6 @@
 #include "Vector3D.h"
 #include "GameEngine.h"
+#include "Ball.h"
 #include "OBJLoader.h"
 
 #define ASSERT(x) if(!(x)) __debugbreak();
@@ -19,18 +20,8 @@ int main(int argc, char* argv[]) {
 
 	GameEngine::initEngine(argc, argv, "Lawn Bowl");
 
-	OBJLoader loader;
-
-	loader.LoadFile("Ball_and_Box.obj");
-
-	Vector3D myVec(5, 2, 3);
-	Vector3D otherVec(1, 1, 1);
-	std::cout << "Dot Product: "<< myVec.DotProduct(otherVec) << std::endl;
-	ASSERT(TestVectorClass(myVec, otherVec));
-	Vector3D cross = myVec.CrossProduct(otherVec);
-	std::cout << "Cross Product: " << cross.x() << " | " << cross.y() << " | " << cross.z() << std::endl;
-	myVec -= otherVec;
-	std::cout << "MYVEC: " << myVec.x() << " | " << myVec.y() << " | " << myVec.z() << std::endl;
+	Ball* myBall = new Ball(10, Vector3D(0, 0, 0), "BlueBall");
+	GameEngine::addGameObject(myBall, false);
 	system("PAUSE");
 	return 0;
 }

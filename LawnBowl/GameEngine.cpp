@@ -71,6 +71,8 @@ void GameEngine::reshapeFunc(int w, int h)
 
 void GameEngine::addGameObject(GameObject * gameobject, bool follow)
 {
+	gameobjects.push_back(gameobject);
+	gameobject->start();
 }
 
 #pragma region COLISION_DETECTION
