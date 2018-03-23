@@ -11,7 +11,7 @@ class GameEngine
 	static std::vector<GameObject*> gameobjects; ///<Vector of (pointers to) game objects: all the objects in the game.
 
 	static glm::mat4 projectionMat;
-	static glm::mat4 *modelView;
+	static glm::mat4 modelView;
 	static Renderer* renderer;
 
 	static void FixedUpdate();

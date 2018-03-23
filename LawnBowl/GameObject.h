@@ -22,7 +22,8 @@ public:
 	virtual ~GameObject();
 
 	virtual unsigned int setupDrawing(unsigned int);
-	
+
+	virtual void draw() = 0;	
 
 	virtual void start() = 0;
 	virtual void update(int deltaTime) = 0;

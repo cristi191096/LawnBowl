@@ -22,9 +22,9 @@ void VertexArray::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout & l
 	const auto& elements = layout.GetElements();
 	for (unsigned int i = 0; i < elements.size();i++) {
 		const auto& element = elements[i];
-		glEnableVertexAttribArray(i);
 		glVertexAttribPointer(i, element.count, element.type, element.normalised, layout.GetStride(), (const void*)offset);
 		offset += element.count * VBElements::GetTypeSize(element.type);
+		glEnableVertexAttribArray(i);
 	}
 
 

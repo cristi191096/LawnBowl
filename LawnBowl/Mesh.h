@@ -19,7 +19,7 @@ public:
 	VertexBuffer* buffer;
 	IndexBuffer* indexBuffer;
 	std::vector<Vertex> vertices;
-	std::vector<unsigned int> indices;
+	std::vector<unsigned int> indices = { 0 };
 	std::string name;
 
 	Material meshMaterial;

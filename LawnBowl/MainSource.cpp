@@ -20,8 +20,10 @@ int main(int argc, char* argv[]) {
 
 	GameEngine::initEngine(argc, argv, "Lawn Bowl");
 
-	Ball* myBall = new Ball(10, Vector3D(0, 0, 0), "BlueBall");
-	GameEngine::addGameObject(myBall, false);
+	std::cout << "Right here, baby!" << std::endl;
+	
+
+	GameEngine::startEngine();
 	system("PAUSE");
 	return 0;
 }

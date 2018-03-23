@@ -1,9 +1,10 @@
 #include "GameEngine.h"
+#include "Ball.h"
 
 Renderer* GameEngine::renderer = new Renderer();
 std::vector<GameObject*> GameEngine::gameobjects;
 glm::mat4 GameEngine::projectionMat = glm::mat4();
-glm::mat4 *GameEngine::modelView = new glm::mat4();
+glm::mat4 GameEngine::modelView = glm::mat4();
 
 
 #pragma region INIT
@@ -19,9 +20,7 @@ void GameEngine::initEngine(int argc, char **argv, const char* windowTitle, bool
 	glutInitWindowSize(width, height);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow(windowTitle);
-
-	glewExperimental = GL_TRUE;
-	glewInit();
+	
 
 	glEnable(GL_RGBA);
 
@@ -53,12 +52,18 @@ void GameEngine::initEngine(int argc, char **argv, const char* windowTitle, bool
 
 
 	glutIdleFunc(updateGame);
+
+	glewExperimental = GL_TRUE;
+	glewInit();
 }
 #pragma endregion Initialise glut, glew and some variables
 void GameEngine::displayFunc() 
 {
+	renderer->Clear();
+
 	for (int i = 0; i < gameobjects.size(); i++) {
-		renderer->Draw(gameobjects[i], DrawType::ARRAYS);
+		gameobjects[i]->draw();
+		renderer->Draw(gameobjects[i], DrawType::ELEMENTS);
 	}
 
 	glutSwapBuffers();
@@ -71,6 +76,7 @@ void GameEngine::reshapeFunc(int w, int h)
 
 void GameEngine::addGameObject(GameObject * gameobject, bool follow)
 {
+	
 	gameobjects.push_back(gameobject);
 	gameobject->start();
 }
@@ -91,8 +97,16 @@ void GameEngine::updateGame() {
 
 #pragma region START_ENGINE
 void GameEngine::startEngine() {
+	Material::shader = new Shader("GameShaders.shader");
+	Material::shader->Bind();
 
+	Ball* myBall = new Ball(10, Vector3D(0, 0, 0), "BlueBall");
+	GameEngine::addGameObject(myBall, false);
 
+	//Send this to the shader
+	projectionMat = glm::frustum(-5.0, 5.0, -5.0, 5.0, 5.0, 100.0);
+
+	glutMainLoop();
 }
 void GameEngine::cleanup()
 {

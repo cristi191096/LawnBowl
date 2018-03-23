@@ -14,5 +14,6 @@ public:
 	~Renderer();
 	//TODO here
 	void Draw(GameObject* object, DrawType type) const;
+	void Clear() const;
 };
 

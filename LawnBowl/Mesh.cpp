@@ -25,7 +25,9 @@ Mesh::~Mesh()
 void Mesh::CreateSphere(int radius, int stacks, int slices)
 {
 	int count;
-
+	delete buffer;
+	delete indexBuffer;
+	delete layout;
 	count = 0;
 	for (int i = 0; i <= stacks; ++i) {
 
@@ -43,8 +45,12 @@ void Mesh::CreateSphere(int radius, int stacks, int slices)
 			GLfloat y = cosf(phi);
 			GLfloat z = sinf(theta) * sinf(phi);
 
-			vertices[count].position = glm::vec3(x * radius, y * radius + 6.0, z * radius);
-			vertices[count].normal = glm::vec3(x, y, z); ///Sphere normals
+			Vertex vert;
+
+			vert.position = glm::vec3(x * radius, y * radius + 6.0, z * radius);
+			vert.normal = glm::vec3(x, y, z); ///Sphere normals
+
+			vertices.push_back(vert);
 
 			count++;
 		}
@@ -54,18 +60,18 @@ void Mesh::CreateSphere(int radius, int stacks, int slices)
 	// Calc The Index Positions
 	for (int i = 0; i < slices * stacks + slices; ++i) {
 
-		indices[count] = i;
+		indices.push_back(i);
 		count++;
-		indices[count] = i + slices + 1;
+		indices.push_back(i + slices + 1);
 		count++;
-		indices[count] = i + slices;
+		indices.push_back( i + slices);
 		count++;
 
-		indices[count] = i + slices + 1;
+		indices.push_back( i + slices + 1);
 		count++;
-		indices[count] = i;
+		indices.push_back(i);
 		count++;
-		indices[count] = i + 1;
+		indices.push_back(i + 1);
 		count++;
 	}
 
@@ -73,4 +79,8 @@ void Mesh::CreateSphere(int radius, int stacks, int slices)
 
 	buffer = new VertexBuffer(vertices, vertices.size() * sizeof(Vertex));
 	indexBuffer = new IndexBuffer(indices, indices.size());
+	layout = new VertexBufferLayout();
+	layout->Push<float>(3);
+	layout->Push<float>(3);
+	layout->Push<float>(2);
 }

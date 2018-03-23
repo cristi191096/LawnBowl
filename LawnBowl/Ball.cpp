@@ -3,20 +3,21 @@
 
 Ball::Ball(int rad, Vector3D pos, std::string tag) : GameObject(pos, tag)
 {
+	v_Array = new VertexArray();
+	v_Array->Bind();
 	this->mesh = new Mesh();
 	this->mesh->CreateSphere(rad, 10, 10);
 }
 
 
 
-void Ball::start()
+void Ball::draw()
 {
-	VertexBufferLayout layout;
-	layout.Push<Vertex>(this->mesh->vertices.size());
-	v_Array = new VertexArray();
+}
 
-	v_Array->AddBuffer(*mesh->buffer, layout);
-
+void Ball::start()
+{	
+	v_Array->AddBuffer(*mesh->buffer, *mesh->layout);
 }
 
 void Ball::update(int deltaTime)

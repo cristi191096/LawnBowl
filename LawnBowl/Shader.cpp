@@ -87,20 +87,6 @@ unsigned int Shader::CreateShader(const std::string & vertexShader, const std::s
 	return program;
 }
 
-unsigned int Shader::GetUniformLocation(const std::string & name)
-{
-	if (uniformLocationCache.find(name) != uniformLocationCache.end()) {
-		return uniformLocationCache[name];
-	}
-	int location = glGetUniformLocation(id, name.c_str());
-
-	if (location == -1) {
-		std::cout << "Uniform " << name << " doesn't exist" << std::endl;
-	}
-	
-	uniformLocationCache[name] = location;
-	return location;
-}
 
 unsigned int Shader::GetProgramID()
 {
@@ -116,6 +102,47 @@ void Shader::Unbind() const
 {
 	glUseProgram(0);
 }
+
+#pragma region UNIFORMS
+
+int Shader::GetUniformLocation(const std::string & name)
+{
+	if (uniformLocationCache.find(name) != uniformLocationCache.end()) {
+		return uniformLocationCache[name];
+	}
+	int location = glGetUniformLocation(id, name.c_str());
+
+	if (location == -1) {
+		std::cout << "Uniform " << name << " doesn't exist" << std::endl;
+	}
+	
+	uniformLocationCache[name] = location;
+	return location;
+}
+
+
+void Shader::SetUniformVec2(const std::string & name, glm::vec2 InputVec)
+{
+	glUniform2f(GetUniformLocation(name), InputVec.x, InputVec.y);
+}
+
+void Shader::SetUniformVec3(const std::string & name, glm::vec3 InputVec)
+{
+	glUniform3f(GetUniformLocation(name), InputVec.x, InputVec.y, InputVec.z);
+}
+
+void Shader::SetUniformVec4(const std::string & name, glm::vec4 InputVec)
+{
+	glUniform4f(GetUniformLocation(name), InputVec.x, InputVec.y, InputVec.z, InputVec.w);
+}
+
+void Shader::SetUniformMat4(const std::string & name, glm::mat4 InputMat)
+{
+	glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(InputMat));
+}
+
+#pragma endregion setting the uniforms
+
 
 Shader::Shader(const std::string& file)
 {

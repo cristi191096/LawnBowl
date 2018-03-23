@@ -1,11 +1,11 @@
 #include "Material.h"
 
 
-Shader* Material::shader = new Shader("GameShaders.shader");
+Shader* Material::shader;
 
 Material::Material()
 {
-	shader->Bind();
+	
 }
 
 
