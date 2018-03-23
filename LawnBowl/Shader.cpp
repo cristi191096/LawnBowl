@@ -121,6 +121,11 @@ int Shader::GetUniformLocation(const std::string & name)
 }
 
 
+void Shader::SetUniform1f(const std::string & name, float f)
+{
+	glUniform1f(GetUniformLocation(name), f);
+}
+
 void Shader::SetUniformVec2(const std::string & name, glm::vec2 InputVec)
 {
 	glUniform2f(GetUniformLocation(name), InputVec.x, InputVec.y);
