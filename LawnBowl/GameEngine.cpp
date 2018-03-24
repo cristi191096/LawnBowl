@@ -20,11 +20,6 @@ void GameEngine::initEngine(int argc, char **argv, const char* windowTitle, bool
 	glutInitWindowSize(width, height);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow(windowTitle);
-	
-
-	glEnable(GL_RGBA);
-
-	glEnable(GL_DEPTH_TEST);
 
 	glutDisplayFunc(displayFunc);
 
@@ -55,11 +50,19 @@ void GameEngine::initEngine(int argc, char **argv, const char* windowTitle, bool
 
 	glewExperimental = GL_TRUE;
 	glewInit();
+
+	glEnable(GL_RGBA);
+	glEnable(GL_DEPTH_TEST);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 #pragma endregion Initialise glut, glew and some variables
+
 void GameEngine::displayFunc() 
 {
 	renderer->Clear();
+	
 
 	for (int i = 0; i < gameobjects.size(); i++) {
 		gameobjects[i]->draw();
@@ -74,7 +77,7 @@ void GameEngine::reshapeFunc(int w, int h)
 	glViewport(0, 0, w, h);
 }
 
-void GameEngine::addGameObject(GameObject * gameobject, bool follow)
+void GameEngine::addGameObject(GameObject * gameobject)
 {
 	
 	gameobjects.push_back(gameobject);
@@ -97,14 +100,16 @@ void GameEngine::updateGame() {
 
 #pragma region START_ENGINE
 void GameEngine::startEngine() {
+	glClearColor(0.5, 0.1, 0.12, 1.0);
 	Material::shader = new Shader("GameShaders.shader");
 	Material::shader->Bind();
 
 	Ball* myBall = new Ball(10, Vector3D(0, 0, 0), "BlueBall");
-	GameEngine::addGameObject(myBall, false);
+	GameEngine::addGameObject(myBall);
 
 	//Send this to the shader
 	projectionMat = glm::frustum(-5.0, 5.0, -5.0, 5.0, 5.0, 100.0);
+	Material::shader->SetUniformMat4("u_ProjectionMat", projectionMat);
 
 	glutMainLoop();
 }

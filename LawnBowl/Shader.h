@@ -49,6 +49,7 @@ public:
 	//Eg. void SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3);
 	//		template <typename T>
 	//Eg2. void SetUniform<T>(const std::string& name, T param);
+	void SetUniform1i(const std::string& name, int var);
 	void SetUniform1f(const std::string& name, float f);
 	void SetUniformVec2(const std::string& name, glm::vec2);
 	void SetUniformVec3(const std::string& name, glm::vec3);

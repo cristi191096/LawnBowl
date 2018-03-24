@@ -15,11 +15,17 @@ Mesh::Mesh(std::vector<Vertex>& verts, std::vector<unsigned int>& inds) :
 	layout = new VertexBufferLayout();
 }
 
+void Mesh::SetMaterial(glm::vec4 colour)
+{
+	meshMaterial = new Material(colour);
+}
+
 Mesh::~Mesh()
 {
 	delete buffer;
 	delete indexBuffer;
 	delete layout;
+	delete meshMaterial;
 }
 
 void Mesh::CreateSphere(int radius, int stacks, int slices)
@@ -83,4 +89,5 @@ void Mesh::CreateSphere(int radius, int stacks, int slices)
 	layout->Push<float>(3);
 	layout->Push<float>(3);
 	layout->Push<float>(2);
+	meshMaterial->PushMaterial(layout);
 }

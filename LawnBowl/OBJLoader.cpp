@@ -181,7 +181,7 @@ bool OBJLoader::LoadMaterials(std::string path)
 			tempMaterial.ambientTexName = tail(line);
 		}
 		if (firstToken(line) == "map_Kd") {
-			tempMaterial.diffuseTexName = tail(line);
+			tempMaterial.SetDiffuseTexture(tail(line));
 		}
 
 		if (firstToken(line) == "map_Bump" || firstToken(line) == "map_bump" || firstToken(line) == "bump") {
@@ -711,7 +711,7 @@ bool OBJLoader::LoadFile(std::string Path)
 
 		for (int j = 0; j < LoadedMaterials.size(); j++) {
 			if (LoadedMaterials[j].name == matName) {
-				LoadedMeshes[i].meshMaterial = LoadedMaterials[j];
+				LoadedMeshes[i].meshMaterial = &LoadedMaterials[j];
 				break;
 			}
 		}
