@@ -18,6 +18,7 @@ Mesh::Mesh(std::vector<Vertex>& verts, std::vector<unsigned int>& inds) :
 void Mesh::SetMaterial(glm::vec4 colour)
 {
 	meshMaterial = new Material(colour);
+	meshMaterial->BindUniforms();
 }
 
 Mesh::~Mesh()
@@ -89,5 +90,6 @@ void Mesh::CreateSphere(int radius, int stacks, int slices)
 	layout->Push<float>(3);
 	layout->Push<float>(3);
 	layout->Push<float>(2);
-	meshMaterial->PushMaterial(layout);
+	//meshMaterial->PushMaterial(layout);
+	
 }

@@ -46,11 +46,7 @@ public:
 		stride += count * VBElements::GetTypeSize(GL_FLOAT);
 	}
 
-	template<>
-	void Push<Vertex>(unsigned int count) {
-		Elements.push_back({ GL_FLOAT, count * 4 * 4 * 2, GL_FALSE });
-		stride += count * VBElements::GetTypeSize(GL_FLOAT);
-	}
+	
 
 	template<>
 	void Push<unsigned int>(unsigned int count) {

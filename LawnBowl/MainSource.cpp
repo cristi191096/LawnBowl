@@ -20,9 +20,7 @@ int main(int argc, char* argv[]) {
 
 	GameEngine::initEngine(argc, argv, "Lawn Bowl");
 
-	std::cout << "Right here, baby!" << std::endl;
 	
-
 	GameEngine::startEngine();
 	system("PAUSE");
 	return 0;

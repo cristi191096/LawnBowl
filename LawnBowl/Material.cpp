@@ -10,14 +10,14 @@ void Material::SetDiffuseTexture(std::string diffuseTexName)
 	diffuseTexture = new Texture(diffuseTexName);
 }
 
-void Material::PushMaterial(VertexBufferLayout* ly) const
-{
-	ly->Push<float>(3);	//Ambient Colour
-	ly->Push<float>(3);	//Diffuse Colour
-	ly->Push<float>(3); //Specular Colour
-	ly->Push<float>(1); //Dissolve/Transparency
-	ly->Push<int>(1);	//Illumination
-}
+//void Material::PushMaterial(VertexBufferLayout* ly) const
+//{
+//	ly->Push<float>(3);	//Ambient Colour
+//	ly->Push<float>(3);	//Diffuse Colour
+//	ly->Push<float>(3); //Specular Colour
+//	ly->Push<float>(1); //Dissolve/Transparency
+//	ly->Push<int>(1);	//Illumination
+//}
 
 Material::Material()
 {
@@ -41,9 +41,9 @@ Material::~Material()
 void Material::BindUniforms()
 {
 	//Set the uniforms within the shader and the program
-	shader->SetUniformVec3("u_AmbientColour", ambientColour);
-	shader->SetUniformVec3("u_DiffuseColour", diffuseColour);
-	shader->SetUniformVec3("u_SpecularColour", specularColour);
-	shader->SetUniform1f("u_Dissolve", dissolve);
-	shader->SetUniform1i("u_illum", illum);
+	shader->SetUniformVec3("AmbientColour", ambientColour);
+	shader->SetUniformVec3("u_Material.DiffuseColour", diffuseColour);
+	shader->SetUniformVec3("u_Material.SpecularColour", specularColour);
+	shader->SetUniform1f("u_Material.Dissolve", dissolve);
+	shader->SetUniform1i("u_Material.illum", illum);
 }

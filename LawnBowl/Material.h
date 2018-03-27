@@ -22,7 +22,7 @@ public:
 	std::string bumpMapName;
 	Texture* diffuseTexture;
 	void SetDiffuseTexture(std::string diffuseTexName);
-	void PushMaterial(VertexBufferLayout* ly) const;
+	//void PushMaterial(VertexBufferLayout* ly) const;
 	Material();
 	Material(glm::vec4 colour);
 	~Material();
