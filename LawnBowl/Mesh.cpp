@@ -13,6 +13,11 @@ Mesh::Mesh(std::vector<Vertex>& verts, std::vector<unsigned int>& inds) :
 	buffer = new VertexBuffer(vertices, vertices.size() * sizeof(Vertex));
 	indexBuffer = new IndexBuffer(indices, indices.size());
 	layout = new VertexBufferLayout();
+	layout->Push<float>(3);
+	layout->Push<float>(3);
+	layout->Push<float>(2);
+	buffer->Bind();
+	indexBuffer->Bind();
 }
 
 void Mesh::SetMaterial(glm::vec4 colour)
@@ -31,11 +36,11 @@ Mesh::~Mesh()
 
 void Mesh::CreateSphere(int radius, int stacks, int slices)
 {
-	int count;
+	
 	delete buffer;
 	delete indexBuffer;
 	delete layout;
-	count = 0;
+	
 	for (int i = 0; i <= stacks; ++i) {
 
 		GLfloat V = i / (float)stacks;
@@ -56,33 +61,33 @@ void Mesh::CreateSphere(int radius, int stacks, int slices)
 
 			vert.position = glm::vec3(x * radius, y * radius + 6.0, z * radius);
 			vert.normal = glm::vec3(x, y, z); ///Sphere normals
-
+			vert.uv = glm::vec2(0.0, 0.0);
 			vertices.push_back(vert);
 
-			count++;
+
 		}
 	}
 
-	count = 0;
+
 	// Calc The Index Positions
 	for (int i = 0; i < slices * stacks + slices; ++i) {
 
 		indices.push_back(i);
-		count++;
+
 		indices.push_back(i + slices + 1);
-		count++;
+
 		indices.push_back( i + slices);
-		count++;
+
 
 		indices.push_back( i + slices + 1);
-		count++;
+
 		indices.push_back(i);
-		count++;
+
 		indices.push_back(i + 1);
-		count++;
+
 	}
 
-	count = 0;
+	
 
 	buffer = new VertexBuffer(vertices, vertices.size() * sizeof(Vertex));
 	indexBuffer = new IndexBuffer(indices, indices.size());
@@ -90,6 +95,8 @@ void Mesh::CreateSphere(int radius, int stacks, int slices)
 	layout->Push<float>(3);
 	layout->Push<float>(3);
 	layout->Push<float>(2);
+	buffer->Bind();
+	indexBuffer->Bind();
 	//meshMaterial->PushMaterial(layout);
 	
 }

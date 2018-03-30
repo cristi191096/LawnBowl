@@ -10,7 +10,7 @@ class Material
 {
 
 public:
-	static Shader* shader;
+	Shader* shader;
 	std::string name;
 	glm::vec3 ambientColour;
 	glm::vec3 diffuseColour;
@@ -23,8 +23,8 @@ public:
 	Texture* diffuseTexture;
 	void SetDiffuseTexture(std::string diffuseTexName);
 	//void PushMaterial(VertexBufferLayout* ly) const;
-	Material();
-	Material(glm::vec4 colour);
+	Material(std::string shaderPath = "Resources/Shaders/GameShaders.shader");
+	Material(glm::vec4 colour, std::string shaderPath = "Resources/Shaders/GameShaders.shader");
 	~Material();
 
 	void BindUniforms();

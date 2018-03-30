@@ -8,7 +8,6 @@ GameObject::GameObject(Vector3D pos, std::string tag)
 {
 	this->tag = tag;
 	this->transform = new Transform(pos, Vector3D(0,0,0), Vector3D(1,1,1));
-	
 }
 
 

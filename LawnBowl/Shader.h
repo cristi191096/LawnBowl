@@ -31,6 +31,8 @@ class Shader
 	ShaderSource source;
 	unsigned int id;
 	std::unordered_map<std::string, int> uniformLocationCache;
+	unsigned int vs;
+	unsigned int fs;
 
 	ShaderSource ReadShader(const std::string& filePath);
 	unsigned int CompileShader(unsigned int type, const std::string source);
@@ -38,7 +40,9 @@ class Shader
 	int GetUniformLocation(const std::string& name);
 
 public:
+	std::string fileName;
 	unsigned int GetProgramID();
+	Shader();
 	Shader(const std::string& file);
 	~Shader();
 	void Bind() const;

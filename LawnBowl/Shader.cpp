@@ -71,9 +71,9 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string source)
 
 unsigned int Shader::CreateShader(const std::string & vertexShader, const std::string fragmentShader)
 {
+	vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
+	fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
 	unsigned int program = glCreateProgram();
-	unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
-	unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
 
 	glAttachShader(program, vs);
 	glAttachShader(program, fs);
@@ -91,6 +91,11 @@ unsigned int Shader::CreateShader(const std::string & vertexShader, const std::s
 unsigned int Shader::GetProgramID()
 {
 	return id;
+}
+
+Shader::Shader()
+{
+	fileName = "";
 }
 
 void Shader::Bind() const
@@ -157,7 +162,7 @@ void Shader::SetUniformMat4(const std::string & name, glm::mat4 InputMat)
 Shader::Shader(const std::string& file)
 {
 	source = ReadShader(file);
-
+	fileName = file;
 	id = CreateShader(source.VertexSource, source.FragmentSource);
 }
 

@@ -13,10 +13,13 @@ class GameEngine
 	static glm::mat4 projectionMat;
 	static glm::mat4 modelView;
 	static Renderer* renderer;
+	static int 	oldTimeSinceStart;
+	static int	newTimeSinceStart;
 
 	static void FixedUpdate();
 	static void updateGame(); ///<Function that updates the game state
 public:
+	static Shader* currentShader;
 	static void initEngine(int argc, char **argv, const char* windowTitle = "New Game", bool debugMode = false, int width = 500, int height = 500); ///<Initialises the engine, initilising glut and OpenGL.
 	static void displayFunc();
 	static void reshapeFunc(int, int);

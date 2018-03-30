@@ -19,7 +19,6 @@ bool TestVectorClass(Vector3D first, Vector3D second) {
 int main(int argc, char* argv[]) {
 
 	GameEngine::initEngine(argc, argv, "Lawn Bowl");
-
 	
 	GameEngine::startEngine();
 	system("PAUSE");

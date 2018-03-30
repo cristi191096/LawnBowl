@@ -16,14 +16,20 @@ void Renderer::Draw(GameObject* object, DrawType type) const
 {
 	
 	object->v_Array->Bind();
+	object->mesh->indexBuffer->Bind();
+	object->mesh->buffer->Bind();
 	
 	if (type == DrawType::ARRAYS) {
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, object->mesh->indexBuffer->GetCount());
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, object->mesh->vertices.size());
 
 	}
 	else if (type == DrawType::ELEMENTS) {
 		glDrawElements(GL_TRIANGLE_STRIP, object->mesh->indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 	}
+
+	object->v_Array->Unbind();
+	object->mesh->indexBuffer->Unbind();
+	object->mesh->buffer->Unbind();
 }
 
 void Renderer::Clear() const

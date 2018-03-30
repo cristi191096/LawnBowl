@@ -4,7 +4,7 @@
 class Ball : public GameObject
 {
 public:
-	Ball(int rad, Vector3D pos, std::string tag);
+	Ball(int rad, Vector3D pos, std::string tag, glm::vec4 col = glm::vec4(1, 0, 1, 1));
 
 	void draw();
 	void start();
