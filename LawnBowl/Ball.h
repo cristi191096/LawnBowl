@@ -3,6 +3,9 @@
 
 class Ball : public GameObject
 {
+
+	void CreateSphere(int radius, int stacks, int slices);
+
 public:
 	Ball(int rad, Vector3D pos, std::string tag, glm::vec4 col = glm::vec4(1, 0, 1, 1));
 

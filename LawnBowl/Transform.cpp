@@ -2,6 +2,11 @@
 #include "Material.h"
 
 
+void Transform::SetModelMat()
+{
+	model = mPosition * mRot * mScale;
+}
+
 Transform::Transform(Vector3D pos, Vector3D rot, Vector3D sc)
 {
 	this->position = pos;
@@ -12,32 +17,33 @@ Transform::Transform(Vector3D pos, Vector3D rot, Vector3D sc)
 
 void Transform::Translate(Vector3D newPos)
 {
-	modelView = glm::mat4(1.0);
-	modelView = glm::translate( modelView, 
+	mPosition = glm::mat4(1.0);
+	mPosition = glm::translate(mPosition,
 		glm::vec3(newPos.x(), newPos.y(), newPos.z())); 
-	
-	
 }
 
 void Transform::Rotate(float angle, Vector3D direction)
 {
-	modelView = glm::mat4(1.0);
-	modelView = glm::translate(modelView,
+	mPosition = glm::mat4(1.0);
+	mPosition = glm::translate(mPosition,
 		glm::vec3(-position.x(), -position.y(), -position.z()));
-	modelView = glm::rotate(modelView, angle, glm::vec3(direction.x(), direction.y(), direction.z()));
-	modelView = glm::translate(modelView,
+	mRot = glm::rotate(mRot, glm::radians(angle), glm::vec3(direction.x(), direction.y(), direction.z()));
+	mPosition = glm::translate(mPosition,
 		glm::vec3(position.x(), position.y(), position.z()));
 	
 }
 
 void Transform::Scale(Vector3D newScale)
 {
-	modelView = glm::mat4(1.0);
-	modelView = glm::scale(modelView, glm::vec3(newScale.x(), newScale.y(), newScale.z()));
+	mScale = glm::mat4(1.0);
+	mScale = glm::scale(mScale, glm::vec3(newScale.x(), newScale.y(), newScale.z()));
 	
 }
 
-
+void Transform::SendModelMatrix(Shader * shader)
+{
+	shader->SetUniformMat4("u_ModelMat", model);
+}
 
 Transform::~Transform()
 {

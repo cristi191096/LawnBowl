@@ -9,13 +9,13 @@
 class GameEngine
 {
 	static std::vector<GameObject*> gameobjects; ///<Vector of (pointers to) game objects: all the objects in the game.
-
+	static Model nanoSuit;
 	static glm::mat4 projectionMat;
 	static glm::mat4 modelView;
-	static Renderer* renderer;
 	static int 	oldTimeSinceStart;
 	static int	newTimeSinceStart;
-
+	static int SCREEN_WIDTH;
+	static int SCREEN_HEIGHT;
 	static void FixedUpdate();
 	static void updateGame(); ///<Function that updates the game state
 public:

@@ -1,7 +1,8 @@
 #pragma once
 
 
-class GameObject;
+class VertexArray;
+class IndexBuffer;
 
 enum class DrawType {
 	ELEMENTS, ARRAYS
@@ -13,7 +14,7 @@ public:
 	Renderer();
 	~Renderer();
 	//TODO here
-	void Draw(GameObject* object, DrawType type) const;
-	void Clear() const;
+	static void Draw(VertexArray* va, IndexBuffer* ib, int vertsNum, DrawType type);
+	static void Clear();
 };
 

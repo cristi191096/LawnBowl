@@ -5,23 +5,26 @@
 
 void Material::SetDiffuseTexture(std::string diffuseTexName)
 {
-	diffTexName = diffuseTexName;
+	diffTexName = diffuseTexName;/*
 	diffuseTexture = new Texture(diffuseTexName);
+	diffuseTexture->Bind();*/
+	Texture diffTex(diffuseTexName);
+	textures.push_back(diffTex);
+	diffTex.Bind();
 }
-
-//void Material::PushMaterial(VertexBufferLayout* ly) const
-//{
-//	ly->Push<float>(3);	//Ambient Colour
-//	ly->Push<float>(3);	//Diffuse Colour
-//	ly->Push<float>(3); //Specular Colour
-//	ly->Push<float>(1); //Dissolve/Transparency
-//	ly->Push<int>(1);	//Illumination
-//}
 
 Material::Material(std::string shaderPath)
 {
-	shader = new Shader(shaderPath);
-	shader->Bind();
+	if (shaderPath != GameEngine::currentShader->fileName) {
+		shader = new Shader(shaderPath);
+		GameEngine::currentShader = shader;
+		shader->Bind();
+	}
+	else
+	{
+		shader = GameEngine::currentShader;
+		shader->Bind();
+	}
 }
 
 Material::Material(glm::vec4 colour, std::string shaderPath)
@@ -46,7 +49,7 @@ Material::Material(glm::vec4 colour, std::string shaderPath)
 
 Material::~Material()
 {
-	delete diffuseTexture;
+
 	delete shader;
 }
 

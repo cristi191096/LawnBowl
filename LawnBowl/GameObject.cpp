@@ -4,7 +4,7 @@
 std::map<int, bool> GameObject::specialKeys;
 std::map<char, bool> GameObject::keys;
 
-GameObject::GameObject(Vector3D pos, std::string tag)
+GameObject::GameObject(Vector3D pos, std::string tag, glm::vec4 col)
 {
 	this->tag = tag;
 	this->transform = new Transform(pos, Vector3D(0,0,0), Vector3D(1,1,1));
@@ -14,8 +14,8 @@ GameObject::GameObject(Vector3D pos, std::string tag)
 GameObject::~GameObject()
 {
 	delete transform;
-	delete mesh;
-	delete v_Array;
+	delete model;
+	
 }
 
 unsigned int GameObject::setupDrawing(unsigned int)
@@ -25,7 +25,7 @@ unsigned int GameObject::setupDrawing(unsigned int)
 
 
 
-void GameObject::LoadMesh(std::string path)
+/*void GameObject::LoadMesh(std::string path)
 {
 	OBJLoader loader;
 
@@ -36,7 +36,7 @@ void GameObject::LoadMesh(std::string path)
 	{
 		std::cout << "Couldn't load the mesh " << std::endl;
 	}
-}
+}*/
 
 void GameObject::EnterCollider(Collider * other)
 {

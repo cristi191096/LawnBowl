@@ -3,22 +3,25 @@
 #include "Collider.h"
 #include "Transform.h"
 #include "OBJLoader.h"
+#include "Model.h"
 #include <map>
+#include <vector>
 
 class GameObject
 {
 protected:
-	
+	std::vector<Vertex> verts;
+	std::vector<unsigned int> inds;
 
 public:
-	VertexArray* v_Array;
+	
 	static std::map<int, bool> GameObject::specialKeys;
 	static std::map<char, bool> GameObject::keys;
 	std::string tag;
 	Transform* transform;
-	Mesh* mesh = nullptr;
+	Model* model = nullptr;
 
-	GameObject(Vector3D, std::string tag);
+	GameObject(Vector3D, std::string tag, glm::vec4 col);
 	virtual ~GameObject();
 
 	virtual unsigned int setupDrawing(unsigned int);

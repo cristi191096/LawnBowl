@@ -4,7 +4,7 @@ Camera* Camera::instance = new Camera();
 
 Camera::Camera()
 {
-	modelView = glm::mat4(1.0);
+	view = glm::mat4(1.0);
 	projection = glm::mat4(1.0);
 }
 
@@ -21,6 +21,6 @@ void Camera::Perspective(const float& left, const float& right, const float& bot
 
 void Camera::LookAt(const glm::vec3 & lookPos, const glm::vec3 & diretion)
 {
-	modelView = glm::mat4(1.0);
-	modelView = glm::lookAt(position, lookPos, diretion);
+	view = glm::mat4(1.0);
+	view = glm::lookAt(position, lookPos, diretion);
 }

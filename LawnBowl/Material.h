@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "glm.hpp"
 #include "Shader.h"
 #include "Texture.h"
@@ -11,6 +12,7 @@ class Material
 
 public:
 	Shader* shader;
+	std::vector<Texture> textures;
 	std::string name;
 	glm::vec3 ambientColour;
 	glm::vec3 diffuseColour;
@@ -20,7 +22,7 @@ public:
 	std::string ambientTexName;
 	std::string diffTexName;
 	std::string bumpMapName;
-	Texture* diffuseTexture;
+	//Texture* diffuseTexture;
 	void SetDiffuseTexture(std::string diffuseTexName);
 	//void PushMaterial(VertexBufferLayout* ly) const;
 	Material(std::string shaderPath = "Resources/Shaders/GameShaders.shader");
