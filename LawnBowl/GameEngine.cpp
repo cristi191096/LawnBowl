@@ -155,15 +155,15 @@ void GameEngine::updateGame() {
 
 #pragma region START_ENGINE
 void GameEngine::startEngine() {
-	glClearColor(0.5, 0.1, 0.12, 1.0);
+	
 	
 	//GameEngine::addGameObject(new Rectangle(5, 5, Vector3D(0, 0, 0), "Rect", glm::vec4(0, 0, 1, 1)));
 	
 	//Rectangle* rectangle = new Rectangle(5, 5, "Rect", glm::vec4(0, 0, 1, 1));
-	Rect* rect = new Rect(700, 700, Vector3D(0, 0, 0), "Rect", glm::vec4(0, 0, 1, 1));
+//	Rect* rect = new Rect(700, 700, Vector3D(0, 0, 0), "Rect", glm::vec4(0, 0, 1, 1));
 	//Ball* myBall = new Ball(0.5, Vector3D(0, 0, 1), "BlueBall", glm::vec4(0,1,0,1));
 	
-	GameEngine::addGameObject(rect);
+	//GameEngine::addGameObject(rect);
 	//GameEngine::addGameObject(myBall);
 
 	nanoSuit = Model("Resources/Models/nanosuit/nanosuit.obj");

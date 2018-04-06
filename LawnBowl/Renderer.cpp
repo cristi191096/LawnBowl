@@ -38,5 +38,6 @@ void Renderer::Draw(VertexArray* va, IndexBuffer* ib, int vertsNum, DrawType typ
 
 void Renderer::Clear()
 {
+	glClearColor(0.5, 0.1, 0.12, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }

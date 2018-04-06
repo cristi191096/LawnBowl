@@ -55,7 +55,7 @@ public:
 	inline float GetYaw() const { return Yaw; }
 	inline float GetMovementSpeed() const { return MovementSpeed; }
 	inline float GetMouseSensitivity() const { return MouseSensitivity; }
-	inline glm::mat4 GetView() const { return glm::lookAt(Position, Position + Front, Up); }
-	inline glm::mat4 GetProjection() const { return projection; }
+	 glm::mat4 GetView() { return glm::lookAt(Position, Position + Front, Up); }
+	 glm::mat4 GetProjection() { return projection; }
 };
 

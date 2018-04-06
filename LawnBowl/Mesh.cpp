@@ -17,12 +17,14 @@ Mesh::Mesh(std::vector<Vertex> verts, std::vector<unsigned int> inds) :
 {
 	meshMaterial = new Material();
 	VAO = new VertexArray();
-	buffer = new VertexBuffer(vertices, vertices.size() * sizeof(Vertex));
-	indexBuffer = new IndexBuffer(indices, indices.size());
+	buffer = new VertexBuffer(verts, verts.size() * sizeof(Vertex));
+	indexBuffer = new IndexBuffer(inds, inds.size());
 	layout = new VertexBufferLayout();
 	layout->Push<float>(3);
 	layout->Push<float>(3);
 	layout->Push<float>(2);
+	layout->Push<float>(3);
+	layout->Push<float>(3);
 	VAO->Bind();
 	buffer->Bind();
 	indexBuffer->Bind();
@@ -30,16 +32,19 @@ Mesh::Mesh(std::vector<Vertex> verts, std::vector<unsigned int> inds) :
 	VAO->Unbind();
 }
 
-Mesh::Mesh(std::vector<Vertex> verts, std::vector<unsigned int> inds, std::vector<Texture> tex)
+Mesh::Mesh(std::vector<Vertex> verts, std::vector<unsigned int> inds, std::vector<Texture> tex) :
+	vertices(verts), indices(inds)
 {
 	meshMaterial = new Material(tex);
 	VAO = new VertexArray();
-	buffer = new VertexBuffer(vertices, vertices.size() * sizeof(Vertex));
-	indexBuffer = new IndexBuffer(indices, indices.size());
+	buffer = new VertexBuffer(verts, verts.size() * sizeof(Vertex));
+	indexBuffer = new IndexBuffer(inds, inds.size());
 	layout = new VertexBufferLayout();
 	layout->Push<float>(3);
 	layout->Push<float>(3);
 	layout->Push<float>(2);
+	layout->Push<float>(3);
+	layout->Push<float>(3);
 	VAO->Bind();
 	buffer->Bind();
 	indexBuffer->Bind();
