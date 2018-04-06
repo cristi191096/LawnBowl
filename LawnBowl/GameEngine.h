@@ -14,6 +14,7 @@ class GameEngine
 	static glm::mat4 modelView;
 	static int 	oldTimeSinceStart;
 	static int	newTimeSinceStart;
+	static int deltaTime;
 	static int SCREEN_WIDTH;
 	static int SCREEN_HEIGHT;
 	static void FixedUpdate();

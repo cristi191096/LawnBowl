@@ -38,12 +38,16 @@ class Shader
 	unsigned int CompileShader(unsigned int type, const std::string source);
 	unsigned int CreateShader(const std::string& vertexShader, const std::string fragmentShader);
 	int GetUniformLocation(const std::string& name);
+	void checkCompileErrors(GLuint shader, std::string type);
 
 public:
+	const char* vertexPath;
+	const char* fragmentPath;
 	std::string fileName;
 	unsigned int GetProgramID();
 	Shader();
 	Shader(const std::string& file);
+	Shader(const char* vPath, const char* fPath);
 	~Shader();
 	void Bind() const;
 	void Unbind() const;
@@ -53,6 +57,7 @@ public:
 	//Eg. void SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3);
 	//		template <typename T>
 	//Eg2. void SetUniform<T>(const std::string& name, T param);
+	//Eg3. void SetUniforms(); -> All in this shader.
 	void SetUniform1i(const std::string& name, int var);
 	void SetUniform1f(const std::string& name, float f);
 	void SetUniformVec2(const std::string& name, glm::vec2);

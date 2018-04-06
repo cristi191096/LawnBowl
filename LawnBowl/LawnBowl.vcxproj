@@ -68,7 +68,9 @@
     <ClInclude Include="VertexBufferLayout.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shaders\GameFragmentShader.fs" />
     <None Include="Resources\Shaders\GameShaders.shader" />
+    <None Include="Resources\Shaders\GameVertexShader.vs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -27,7 +27,7 @@ void Renderer::Draw(VertexArray* va, IndexBuffer* ib, int vertsNum, DrawType typ
 
 	}
 	else if (type == DrawType::ELEMENTS) {
-		glDrawElements(GL_TRIANGLE_STRIP, ib->GetCount(), GL_UNSIGNED_INT, nullptr);
+		glDrawElements(GL_TRIANGLES, ib->GetCount(), GL_UNSIGNED_INT, nullptr);
 	}
 	va->Unbind();
 	ib->Unbind();

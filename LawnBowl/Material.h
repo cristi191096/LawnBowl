@@ -10,6 +10,7 @@ class VertexBufferLayout;
 class Material
 {
 
+	void SetShader(const char* vshaderPath, const char* fshaderPath);
 public:
 	Shader* shader;
 	std::vector<Texture> textures;
@@ -25,8 +26,9 @@ public:
 	//Texture* diffuseTexture;
 	void SetDiffuseTexture(std::string diffuseTexName);
 	//void PushMaterial(VertexBufferLayout* ly) const;
-	Material(std::string shaderPath = "Resources/Shaders/GameShaders.shader");
-	Material(glm::vec4 colour, std::string shaderPath = "Resources/Shaders/GameShaders.shader");
+	Material(const char* vshaderPath = "Resources/Shaders/GameVertexShader.vs", const char* fShaderPath = "Resources/Shaders/GameFragmentShader.fs");
+	Material(std::vector<Texture> tex, const char* vshaderPath = "Resources/Shaders/GameVertexShader.vs", const char* fShaderPath = "Resources/Shaders/GameFragmentShader.fs");
+	Material(glm::vec4 colour, const char* vshaderPath = "Resources/Shaders/GameVertexShader.vs", const char* fShaderPath = "Resources/Shaders/GameFragmentShader.fs");
 	~Material();
 
 	void BindUniforms();

@@ -30,7 +30,8 @@ public:
 	std::string name;
 
 	Mesh();
-	Mesh(std::vector<Vertex>& verts, std::vector<unsigned int>& inds);
+	Mesh(std::vector<Vertex> verts, std::vector<unsigned int> inds);
+	Mesh(std::vector<Vertex> verts, std::vector<unsigned int> inds, std::vector<Texture> tex);
 	void SetMaterial(glm::vec4 colour = glm::vec4(1,0,1,1));
 	void Draw() const;
 	~Mesh();

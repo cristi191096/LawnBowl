@@ -3,6 +3,29 @@
 #include "GameEngine.h"
 
 
+void Material::SetShader(const char * vshaderPath, const char * fshaderPath)
+{
+	if (GameEngine::currentShader == nullptr) {
+		shader = new Shader(vshaderPath, fshaderPath);
+		GameEngine::currentShader = shader;
+		//shader->Bind();
+	}
+	else
+	{
+		if (vshaderPath != GameEngine::currentShader->vertexPath && fshaderPath != GameEngine::currentShader->fragmentPath) {
+			shader = new Shader(vshaderPath, fshaderPath);
+			GameEngine::currentShader = shader;
+			//shader->Bind();
+		}
+		else
+		{
+			shader = GameEngine::currentShader;
+			//shader->Bind();
+
+		}
+	}
+}
+
 void Material::SetDiffuseTexture(std::string diffuseTexName)
 {
 	diffTexName = diffuseTexName;/*
@@ -13,33 +36,20 @@ void Material::SetDiffuseTexture(std::string diffuseTexName)
 	diffTex.Bind();
 }
 
-Material::Material(std::string shaderPath)
-{
-	if (shaderPath != GameEngine::currentShader->fileName) {
-		shader = new Shader(shaderPath);
-		GameEngine::currentShader = shader;
-		shader->Bind();
-	}
-	else
-	{
-		shader = GameEngine::currentShader;
-		shader->Bind();
-	}
+Material::Material(const char* vshaderPath, const char* fshaderPath)
+{ 
+	SetShader(vshaderPath, fshaderPath);
 }
 
-Material::Material(glm::vec4 colour, std::string shaderPath)
+Material::Material(std::vector<Texture> tex, const char * vshaderPath, const char * fShaderPath)
 {
-	if (shaderPath != GameEngine::currentShader->fileName) {
-	shader = new Shader(shaderPath);
-	GameEngine::currentShader = shader;
-	shader->Bind();
-	}
-	else
-	{
-		shader = GameEngine::currentShader;
-		shader->Bind();
-	}
-	
+	SetShader(vshaderPath, fShaderPath);
+	textures = tex;
+}
+
+Material::Material(glm::vec4 colour, const char* vshaderPath, const char* fshaderPath)
+{
+	SetShader(vshaderPath, fshaderPath);
 	ambientColour = glm::vec3(colour.r, colour.g, colour.b);
 	diffuseColour = glm::vec3(colour.r, colour.g, colour.b);
 	specularColour = glm::vec3(0, 0, 0);

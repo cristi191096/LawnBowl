@@ -3,16 +3,18 @@
 #include "Ball.h"
 #include "Rect.h"
 
-Shader* GameEngine::currentShader = new Shader();
+Shader* GameEngine::currentShader = nullptr;
 std::vector<GameObject*> GameEngine::gameobjects;
 glm::mat4 GameEngine::projectionMat = glm::mat4();
 glm::mat4 GameEngine::modelView = glm::mat4();
 int GameEngine::oldTimeSinceStart;
 int GameEngine::newTimeSinceStart;
+int GameEngine::deltaTime;
 int GameEngine::SCREEN_WIDTH;
 int GameEngine::SCREEN_HEIGHT;
 
 Model GameEngine::nanoSuit;
+
 
 
 #pragma region INIT
@@ -43,20 +45,20 @@ void GameEngine::initEngine(int argc, char **argv, const char* windowTitle, bool
 			exit(0);
 		}
 		if (key == 'a') {
-			Camera::instance->position.x -= 0.01;
-			std::cout << "CamPos: " << Camera::instance->position.x << " | " << Camera::instance->position.y << " | " << Camera::instance->position.z << std::endl;
+			Camera::instance->ProcessKeyboardInput(LEFT, deltaTime);
+			std::cout << "CamPos: " << Camera::instance->Position.x << " | " << Camera::instance->Position.y << " | " << Camera::instance->Position.z << std::endl;
 		}
 		if (key == 'd') {
-			Camera::instance->position.x += 0.01;
-			std::cout << "CamPos: " << Camera::instance->position.x << " | " << Camera::instance->position.y << " | " << Camera::instance->position.z << std::endl;
+			Camera::instance->ProcessKeyboardInput(RIGHT, deltaTime);
+			std::cout << "CamPos: " << Camera::instance->Position.x << " | " << Camera::instance->Position.y << " | " << Camera::instance->Position.z << std::endl;
 		}
 		if (key == 'w') {
-			Camera::instance->position.z += 0.1;
-			std::cout << "CamPos: " << Camera::instance->position.x << " | " << Camera::instance->position.y << " | " << Camera::instance->position.z << std::endl;
+			Camera::instance->ProcessKeyboardInput(FORWARD, deltaTime);
+			std::cout << "CamPos: " << Camera::instance->Position.x << " | " << Camera::instance->Position.y << " | " << Camera::instance->Position.z << std::endl;
 		}
 		if (key == 's') {
-			Camera::instance->position.z -= 0.1;
-			std::cout << "CamPos: " << Camera::instance->position.x << " | " << Camera::instance->position.y << " | " << Camera::instance->position.z << std::endl;
+			Camera::instance->ProcessKeyboardInput(BACKWARD, deltaTime);
+			std::cout << "CamPos: " << Camera::instance->Position.x << " | " << Camera::instance->Position.y << " | " << Camera::instance->Position.z << std::endl;
 		}
 	});
 	glutKeyboardUpFunc([](unsigned char key, int x, int y) {
@@ -89,19 +91,20 @@ void GameEngine::displayFunc()
 {
 	Renderer::Clear();
 
-	Camera::instance->LookAt( glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
-	currentShader->SetUniformMat4("u_ViewMat", Camera::instance->GetView());
+	currentShader->Bind();
+	currentShader->SetUniformMat4("view", Camera::instance->GetView());
 	//Material::shader->SetUniformMat4("u_ModelViewMat", modelView);
 	for (int i = 0; i < gameobjects.size(); i++) {
 		gameobjects[i]->draw();
 		//renderer->Draw(gameobjects[i], DrawType::ELEMENTS);
 	}
 
-	glm::mat4 model;
-	model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
-	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
-	currentShader->SetUniformMat4("u_ModelMat", model);
+	glm::mat4 model(1.0);
+	model = glm::translate(model, glm::vec3(0.0f, -1.75f, -70.0f)); // translate it down so it's at the center of the scene
+	//model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
+	currentShader->SetUniformMat4("model", model);
 
+	
 	nanoSuit.Draw();
 
 	glutSwapBuffers();
@@ -134,7 +137,7 @@ void GameEngine::updateGame() {
 
 	oldTimeSinceStart = newTimeSinceStart;
 	newTimeSinceStart = glutGet(GLUT_ELAPSED_TIME);
-	int deltaTime = newTimeSinceStart - oldTimeSinceStart;
+	deltaTime = newTimeSinceStart - oldTimeSinceStart;
 
 	if (deltaTime == 0) {
 		Sleep(1);
@@ -157,17 +160,17 @@ void GameEngine::startEngine() {
 	//GameEngine::addGameObject(new Rectangle(5, 5, Vector3D(0, 0, 0), "Rect", glm::vec4(0, 0, 1, 1)));
 	
 	//Rectangle* rectangle = new Rectangle(5, 5, "Rect", glm::vec4(0, 0, 1, 1));
-	//Rect* rect = new Rect(700, 700, Vector3D(0, 0, 0), "Rect", glm::vec4(0, 0, 1, 1));
+	Rect* rect = new Rect(700, 700, Vector3D(0, 0, 0), "Rect", glm::vec4(0, 0, 1, 1));
 	//Ball* myBall = new Ball(0.5, Vector3D(0, 0, 1), "BlueBall", glm::vec4(0,1,0,1));
 	
-	//GameEngine::addGameObject(rect);
+	GameEngine::addGameObject(rect);
 	//GameEngine::addGameObject(myBall);
 
-	nanoSuit = Model("Box_Tex.obj");
+	nanoSuit = Model("Resources/Models/nanosuit/nanosuit.obj");
 
-
+	currentShader->Bind();
 	Camera::instance->Perspective(-SCREEN_WIDTH/2, SCREEN_WIDTH / 2, -SCREEN_HEIGHT / 2, SCREEN_HEIGHT / 2, 0.2f, 100.0f);
-	currentShader->SetUniformMat4("u_ProjectionMat", Camera::instance->GetProjection());
+	currentShader->SetUniformMat4("projection", Camera::instance->GetProjection());
 	//Send this to the shader
 	
 	//Material::shader->SetUniformMat4("u_ProjectionMat", projectionMat);
